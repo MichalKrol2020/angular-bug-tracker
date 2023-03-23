@@ -61,7 +61,7 @@ export class ProjectsComponent implements OnInit
   }
 
 
-  listProjects()
+  listProjects(): void
   {
     const currentAppUserId = this.authenticationService.getUserFromLocalCache().id;
     if(this.authenticationService.isProjectLeader())
@@ -90,7 +90,7 @@ export class ProjectsComponent implements OnInit
   }
 
 
-  onChangeSortOrder(sortOrder: string)
+  onChangeSortOrder(sortOrder: string): void
   {
     if(this.sortOrder != sortOrder)
     {
@@ -105,14 +105,14 @@ export class ProjectsComponent implements OnInit
   }
 
 
-  openCreateProjectDialog()
+  openCreateProjectDialog(): void
   {
     const dialogConfig = DialogUtils.createBasicConfig(350, 655);
     const dialogRef = DialogUtils.openDialog(this.zone, this.dialog, dialogConfig, CreateProjectComponent);
     this.listProjectsIfDialogConfirmed(dialogRef);
   }
 
-  private listProjectsIfDialogConfirmed(dialogRef: MatDialogRef<CreateProjectComponent>)
+  private listProjectsIfDialogConfirmed(dialogRef: MatDialogRef<CreateProjectComponent>): void
   {
     this.subscriptions.push(
     dialogRef.afterClosed().subscribe((confirmed: boolean) =>
@@ -125,7 +125,7 @@ export class ProjectsComponent implements OnInit
   }
 
   @HostListener('window:resize', ['$event'])
-  private onResize()
+  private onResize(): void
   {
     const countedSize = PageUtils.calculatePageSizeWithPrevention
     (this.currentPageHeight, window.innerHeight, this.pageDivider, this.minSize, this.size);
@@ -138,32 +138,32 @@ export class ProjectsComponent implements OnInit
     this.listProjects();
   }
 
-  private setPageData(countedSize: number)
+  private setPageData(countedSize: number): void
   {
     this.size = countedSize;
     this.currentPageHeight = window.innerHeight;
     this.page = 1;
   }
 
-  onModChange()
+  onModChange(): void
   {
     this.modSelectedChangedEvent.emit(this.modSelected);
   }
 
-  onReloadProjectsRequested()
+  onReloadProjectsRequested(): void
   {
     this.modSelected = ProjectsModEnum.ISSUES;
     this.listProjects();
   }
 
 
-  getTableHeaderClass(item: any)
+  getTableHeaderClass(item: any): string
   {
     return 'headers-row' + (this.tableData.indexOf(item) == 0 ? '-first' : '');
   }
 
 
-  ngOnDestroy()
+  ngOnDestroy(): void
   {
     this.subscriptions.forEach
     ((subscription) => subscription.unsubscribe());
