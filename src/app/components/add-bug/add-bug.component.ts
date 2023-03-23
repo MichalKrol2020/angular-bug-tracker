@@ -98,6 +98,7 @@ export class AddBugComponent implements OnInit
     bug.severity = this.getBugSeverityValue();
     bug.description = this.getBugDescription()?.value;
 
+    console.log(bug)
     this.addBug(bug);
   }
 
@@ -151,7 +152,7 @@ export class AddBugComponent implements OnInit
   }
 
 
-  private onBugAddedSuccessfully(): (response: CustomHttpResponse | undefined) => void
+  private onBugAddedSuccessfully()
   {
     return (response: CustomHttpResponse | undefined) =>
     {
@@ -211,3 +212,6 @@ export class AddBugComponent implements OnInit
     return this.addBugFormGroup.get('description');
   }
 }
+
+
+
