@@ -13,11 +13,9 @@ import {SelectConversationEvent} from "talkjs/all";
 })
 export class InboxComponent implements OnInit
 {
-  expanded: boolean = false;
-  baseUrl!: string;
+  public expanded: boolean = false;
+  private baseUrl!: string;
   private inbox!: Talk.Inbox;
-
-  route!: string;
 
   private subscriptions: Subscription[] = [];
 
@@ -28,8 +26,7 @@ export class InboxComponent implements OnInit
     this.setBaseUrl();
   }
 
-
-  private setBaseUrl()
+  private setBaseUrl(): void
   {
     this.subscriptions.push(
       this.router.events.pipe
@@ -46,7 +43,7 @@ export class InboxComponent implements OnInit
     this.openInbox();
   }
 
-  private openInbox()
+  private openInbox(): void
   {
     this.createInbox().then
     (() => this.inbox.onSelectConversation((event: SelectConversationEvent) =>
@@ -55,12 +52,13 @@ export class InboxComponent implements OnInit
     }));
   }
 
-  private openConversation(event: SelectConversationEvent)
+  private openConversation(event: SelectConversationEvent): void
   {
     if(event.conversation != undefined)
     {
       this.router.navigateByUrl(`${this.baseUrl}/chat/${event.others.at(0)?.id}`)
     }
+
     event.preventDefault();
   }
 
@@ -70,14 +68,13 @@ export class InboxComponent implements OnInit
     await this.inbox.mount(document.getElementById('inbox-container'))
   }
 
-
-  ngOnDestroy()
-  {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
-
-  toggleExpand()
+  onExpand(): void
   {
     this.expanded = !this.expanded;
+  }
+
+  ngOnDestroy(): void
+  {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }
