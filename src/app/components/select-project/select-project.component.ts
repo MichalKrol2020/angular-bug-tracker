@@ -52,7 +52,7 @@ export class SelectProjectComponent implements OnInit
     this.onFormSubmitted();
   }
 
-  private onFormSubmitted()
+  private onFormSubmitted(): void
   {
     this.subscriptions.push(
     this.formSubmitted$.subscribe((submit) =>
@@ -69,7 +69,7 @@ export class SelectProjectComponent implements OnInit
     }));
   }
 
-  listProjects()
+  listProjects(): void
   {
     if(this.isProjectLeader)
     {
@@ -89,7 +89,7 @@ export class SelectProjectComponent implements OnInit
     }
   }
 
-  onSelectProject(project: Project | undefined)
+  onSelectProject(project: Project | undefined): void
   {
     this.selectedProject = project;
     this.invalid = false;
@@ -106,7 +106,7 @@ export class SelectProjectComponent implements OnInit
     }
   }
 
-  showWarningIfProjectChangeDetected()
+  showWarningIfProjectChangeDetected(): boolean
   {
     if(!this.isProjectLeader)
     {
@@ -123,7 +123,7 @@ export class SelectProjectComponent implements OnInit
 
 
   @HostListener('scroll', ['$event'])
-  onScroll(event: Event)
+  onScroll(event: Event): void
   {
     const target = event.target as HTMLElement;
     const scrolled: boolean = target.scrollTop + target.offsetHeight >= target.scrollHeight - 1;
@@ -134,8 +134,10 @@ export class SelectProjectComponent implements OnInit
     }
   }
 
-  ngOnDestroy()
+  ngOnDestroy(): void
   {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe())
   }
 }
+
+
