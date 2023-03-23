@@ -9,7 +9,7 @@ import {Component, Input, NgZone, OnInit} from '@angular/core';
 import {CustomHttpResponse} from "../../model/custom-http-response";
 import {DialogUtils} from "../../utils/dialog-utils";
 import {inOut} from "../../const/animations";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {mergeMap, Observable, of, Subscription} from "rxjs";
 import {NotificationType} from "../../enum/notification-type.enum";
 import {tableParticipantsData} from "../../const/table-headers-data";
@@ -26,6 +26,7 @@ import {
   UNASSIGN_PARTICIPANT_DIALOG_TITLE,
   WHITESPACE
 } from "../../const/dialog-const";
+import {WarningDialogComponent} from "../warning-dialog/warning-dialog.component";
 
 
 
@@ -88,7 +89,7 @@ export class ParticipantsListComponent implements OnInit {
     (this.processResult());
   }
 
-  public onUnassignParticipant(participant: User)
+  public onUnassignParticipant(participant: User): void
   {
     const dialogRef = this.openUnassignParticipantDialog(participant);
 
@@ -113,7 +114,7 @@ export class ParticipantsListComponent implements OnInit {
       }));
   }
 
-  private openUnassignParticipantDialog(participant: User)
+  private openUnassignParticipantDialog(participant: User): MatDialogRef<WarningDialogComponent>
   {
     const title = UNASSIGN_PARTICIPANT_DIALOG_TITLE;
     const description = TRYING_TO_UNASSIGN +
@@ -136,7 +137,7 @@ export class ParticipantsListComponent implements OnInit {
     }
   }
 
-  private onParticipantUnassignedSuccessfully(response: CustomHttpResponse)
+  private onParticipantUnassignedSuccessfully(response: CustomHttpResponse): void
   {
     this.notificationService.notify(NotificationType.SUCCESS, response.message);
   }
@@ -163,7 +164,7 @@ export class ParticipantsListComponent implements OnInit {
     this.listParticipants();
   }
 
-  public getTableHeaderClass(item: any)
+  public getTableHeaderClass(item: any): string
   {
     const isFirstElement: boolean = this.tableData.indexOf(item) == 0;
     return isFirstElement ? 'headers-column-first' : '';
