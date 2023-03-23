@@ -11,6 +11,7 @@ import {RegisterRequest} from "../../model/authentication/register-request";
 import {CustomHttpResponse} from "../../model/custom-http-response";
 import {HttpErrorResponse} from "@angular/common/http";
 import {UserEnumMapper} from "../../enum/mapper/user-enum-mapper";
+import {UserSpecialityEnum} from "../../enum/user-speciality.enum";
 
 @Component({
   selector: 'app-register',
@@ -40,7 +41,7 @@ export class RegisterComponent implements OnInit {
     this.createRegisterFormGroup();
   }
 
-  private createRegisterFormGroup()
+  private createRegisterFormGroup(): void
   {
     this.registerFormGroup = this.formBuilder.group
     (
@@ -58,7 +59,7 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  onSubmit()
+  onSubmit(): void
   {
     if(this.registerFormGroup.invalid)
     {
@@ -76,13 +77,13 @@ export class RegisterComponent implements OnInit {
     this.register(request);
   }
 
-  private getUserSpecialityEnumName()
+  private getUserSpecialityEnumName(): UserSpecialityEnum
   {
     const speciality = this.getSpeciality()?.value;
     return UserEnumMapper.mapSpecialityToEnumName(speciality);
   }
 
-  private register(request: RegisterRequest)
+  private register(request: RegisterRequest): void
   {
     this.subscriptions.push(
       this.authenticationService.register(request).subscribe(
@@ -108,7 +109,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  ngOnDestroy()
+  ngOnDestroy(): void
   {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe())
   }
