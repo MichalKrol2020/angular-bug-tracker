@@ -48,11 +48,13 @@ export class AssignUserBugComponent implements OnInit
     this.currentAssignee = this.bug.assignee;
     this.projectId = this.bug.project?.id;
   }
+  
 
   ngOnInit(): void
   {
     this.listWorkers();
   }
+  
 
   listWorkers(): void
   {
@@ -93,6 +95,7 @@ export class AssignUserBugComponent implements OnInit
   {
     this.selectedAssignee = assignee;
   }
+  
 
   onSubmit(): void
   {
@@ -128,6 +131,7 @@ export class AssignUserBugComponent implements OnInit
       this.notificationService.sendErrorNotification(errorResponse.error.message);
     }
   }
+  
 
   onSearchParticipants(): void
   {
@@ -136,8 +140,7 @@ export class AssignUserBugComponent implements OnInit
     this.isEndOfPages = false;
     this.searchParticipants();
   }
-
-
+  
   private searchParticipants(): void
   {
     const fullName = this.searchUserFormControl.value;
@@ -172,7 +175,7 @@ export class AssignUserBugComponent implements OnInit
       (fullName, projectId, this.page, this.size).subscribe(this.processResponse()));
   }
 
-  private processResponse(): (data: UserPageableResponse) => void
+  private processResponse()
   {
     return (data: UserPageableResponse) =>
     {
