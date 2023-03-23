@@ -39,7 +39,7 @@ export class ResetPasswordComponent implements OnInit
     this.createResetPasswordFormGroup();
   }
 
-  private createResetPasswordFormGroup()
+  private createResetPasswordFormGroup(): void
   {
     this.passwordFormGroup = this.formBuilder.group
     ({
@@ -51,7 +51,7 @@ export class ResetPasswordComponent implements OnInit
       });
   }
 
-  onSubmit()
+  onSubmit(): void
   {
     if(this.passwordFormGroup.invalid)
     {
@@ -71,7 +71,7 @@ export class ResetPasswordComponent implements OnInit
     this.resetPassword(password, token);
   }
 
-  private resetPassword(newPassword: string, token: string)
+  private resetPassword(newPassword: string, token: string): void
   {
     this.subscription =
       this.userService.resetPassword(newPassword, token).subscribe
@@ -99,7 +99,7 @@ export class ResetPasswordComponent implements OnInit
     }
   }
 
-  resolved(captchaResponse: string)
+  resolved(captchaResponse: string): void
   {
     this.captcha = captchaResponse;
   }
