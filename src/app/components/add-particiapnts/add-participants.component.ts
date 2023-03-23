@@ -13,7 +13,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Project} from "../../model/project";
 import {Subscription} from "rxjs";
 import {UserPageableResponse} from "../../model/user-pageable-response";
-import {UserRole} from "../../enum/user-role.enum";
 
 @Component({
   selector: 'app-assign-users-project',
@@ -57,7 +56,7 @@ export class AddParticipantsComponent implements OnInit
       (this.processResults()));
   }
 
-  private processResults(): (data: UserPageableResponse) => void
+  private processResults()
   {
     return (data: UserPageableResponse) =>
     {
@@ -77,7 +76,7 @@ export class AddParticipantsComponent implements OnInit
       }));
   }
 
-  private onParticipantsAddedSuccessfully(): (response: CustomHttpResponse) => void
+  private onParticipantsAddedSuccessfully()
   {
     return (response: CustomHttpResponse) =>
     {
@@ -86,7 +85,7 @@ export class AddParticipantsComponent implements OnInit
     }
   }
 
-  private onError(): (errorResponse: HttpErrorResponse) => void
+  private onError()
   {
     return (errorResponse: HttpErrorResponse) =>
     {
@@ -150,3 +149,5 @@ export class AddParticipantsComponent implements OnInit
     ((subscription) => subscription.unsubscribe());
   }
 }
+
+
