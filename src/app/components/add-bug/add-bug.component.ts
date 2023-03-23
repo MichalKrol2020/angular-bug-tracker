@@ -98,7 +98,6 @@ export class AddBugComponent implements OnInit
     bug.severity = this.getBugSeverityValue();
     bug.description = this.getBugDescription()?.value;
 
-    console.log(bug)
     this.addBug(bug);
   }
 
