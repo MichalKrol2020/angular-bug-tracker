@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy
     );
   }
 
-  onSubmit()
+  onSubmit(): void
   {
     if(this.loginFormGroup.invalid)
     {
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit, OnDestroy
   }
 
 
-  ngOnDestroy()
+  ngOnDestroy(): void
   {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
