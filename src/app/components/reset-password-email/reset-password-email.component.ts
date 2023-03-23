@@ -38,7 +38,7 @@ export class ResetPasswordEmailComponent implements OnInit
     this.emailFormControl = new FormControl('', [Validators.required, Validators.minLength(2)]);
   }
 
-  onSubmit()
+  onSubmit(): void
   {
     if(this.emailFormControl.invalid)
     {
@@ -50,7 +50,7 @@ export class ResetPasswordEmailComponent implements OnInit
     this.sendResetPasswordEmail(email);
   }
 
-  private sendResetPasswordEmail(email: string)
+  private sendResetPasswordEmail(email: string): void
   {
     this.subscription =
     this.userService.sendResetPasswordEmail(email).subscribe
@@ -80,12 +80,12 @@ export class ResetPasswordEmailComponent implements OnInit
     }
   }
 
-  resolved(captchaResponse: string)
+  resolved(captchaResponse: string): void
   {
     this.captcha = captchaResponse;
   }
 
-  ngOnDestroy()
+  ngOnDestroy(): void
   {
     this.subscription?.unsubscribe();
   }
