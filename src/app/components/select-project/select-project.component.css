@@ -1,0 +1,60 @@
+.select-normal
+{
+  background-color: #E8E8E8;
+}
+
+.select-invalid
+{
+  background-color: rgba(255, 0, 0, 0.2);
+  color: red;
+}
+
+.select-invalid .select-enabled
+{
+  color: red;
+}
+
+.warning-container
+{
+  width: 280px;
+}
+
+.warning-text
+{
+  color: red;
+}
+
+.participants-list
+{
+  width: 280px;
+  overflow: hidden;
+  margin-top: 1rem;
+  height: auto;
+  max-height: 300px;
+  overflow-y: auto;
+  position: absolute;
+}
+
+.no-projects
+{
+  margin-left: 5.5rem;
+}
+
+.dropdown-item
+{
+  border-bottom: solid #E3E3E3 1px;
+}
+
+.project-name-text
+{
+  font-size: 16px;
+  color: #818181;
+}
+
+.select-project-button
+{
+  text-align: left;
+  width: 280px;
+  border: none;
+  background: none;
+}

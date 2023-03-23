@@ -1,0 +1,119 @@
+<div class="issues-container">
+  <select *ngIf="isUser"
+          [(ngModel)]="modSelected"
+          (ngModelChange)="onModChange()"
+          class="mod-selector">
+    <option *ngFor="let mod of tableIssuesMods"
+            [ngValue]="mod.option">
+      {{mod.option}}
+    </option>
+  </select>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+      <tr>
+        <th *ngFor="let item of tableData"
+            [ngClass]="item.class">
+          <button (click)="onChangeSortOrder(item.orderBy)"
+                  class="sort-button" type="button">
+            {{item.label}}
+            <i class="fal fa-sort"></i>
+          </button>
+        </th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let bug of bugs"
+             class="tbody">
+      <tr class="table-row">
+        <td>
+          <i [ngClass]="!bug.expanded ? 'fa-chevron-circle-right' : 'fa-chevron-circle-down'"
+             class="chevron-icon fal" ></i>
+          <button (click)="onBugExpand(bug)"
+                  class="title-link"
+                  type="button" >
+            {{bug.name}}
+          </button>
+          <div *ngIf="bug.expanded"
+               @inOut
+               class="description-container">
+            <span>
+              {{bug.description}}
+            </span>
+          </div>
+        </td>
+        <td>
+          {{bug.classification}}
+        </td>
+        <td>
+          {{bug.status}}
+        </td>
+        <td>
+          <span [ngClass]="getSeverityClass(bug.severity)"
+                class="severity-text">
+            {{bug.severity}}
+          </span>
+        </td>
+        <td>
+          {{bug.project?.name}}
+        </td>
+        <td *ngIf="modSelected == modAddedIssues || isProjectLeader"
+            class="assignee">
+          <div *ngIf="bug.assignee" class="assignee-container">
+              <a routerLink="chat/{{bug.assignee.id}}"
+                 class="chat-link">
+                <i class="far fa-comment-dots"></i>
+                <span>
+                  {{bug.assignee.firstName}} {{bug.assignee.lastName}}
+                </span>
+              </a>
+              <button *ngIf="isProjectLeader" class="btn unassign-button"
+                 (click)="onUnassignWorkerFromBug(bug)">
+                <i class="fas fa-user-slash unassign-icon"></i>
+              </button>
+          </div>
+          <span *ngIf="!bug.assignee"
+                class="not-assigned-text">
+            Not assigned
+          </span>
+        </td>
+        <td *ngIf="modSelected == modAddedIssues || isProjectLeader">
+          {{getDayMonthYear(bug.creationDate)}}
+        </td>
+        <td>
+          <div [ngClass]="getMenuClass()"
+               class="menu-icons-group menu-icons-style">
+            <a *ngIf="showEditButton(bug)"
+               (click)="openUpdateDialog(bug)"
+               class="menu-icon-link">
+              <i class="fa fa-pen menu-icon"></i>
+            </a>
+            <a *ngIf="isProjectLeader"
+               (click)="openAssignUserDialog(bug)"
+               class="menu-icon-link">
+              <i class="fa-solid fa-user-plus menu-icon"></i>
+            </a>
+            <a *ngIf="bug.status == bugStatusNew || isProjectLeader"
+               (click)="onDeleteBug(bug)"
+               class="menu-icon-link">
+              <i class="fa fa-trash "></i>
+            </a>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+    <ngb-pagination class="pagination"
+      [(page)]="page"
+      [pageSize]="size"
+      [collectionSize]="totalElements"
+      [maxSize]="5"
+      (pageChange)="listBugs()">
+    </ngb-pagination>
+</div>
+
+<router-outlet></router-outlet>
+<notifier-container></notifier-container>
+

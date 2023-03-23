@@ -1,0 +1,121 @@
+.bg-custom-1 {
+  background-color: #85144b;
+}
+
+.bg-custom-2 {
+  background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+}
+
+.header
+{
+  height: 5rem;
+}
+
+.profile-link-container
+{
+  border: solid 2px #DDDDDD;
+  border-radius: 5px;
+  padding: 0.4rem 0 0.4rem 0.5rem;
+  margin-right: 0.5rem
+}
+
+.profile-link-container:hover
+{
+  filter: brightness(105%);
+}
+
+.profile-link
+{
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  color: #b7c4ca;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: color .3s ease;
+  margin-right: 2rem;
+}
+
+.profile-link .profile-picture
+{
+  padding: 0.1rem;
+  width: 3rem;
+  height: 3rem;
+  background: rgba(178, 190, 181, 0.8);
+  border-radius: 50%;
+}
+
+.profile-link .profile-text
+{
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  color: #8690a3;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+.profile-link .role-text
+{
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  color: #B2B2B2;
+  font-weight: bold;
+  padding-left: 1rem;
+}
+
+.icon-group
+{
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 15px;
+  margin-left: 1rem;
+  margin-right: 4rem;
+}
+
+.header-icon
+{
+  color: #8690a3;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  font-size: 25px;
+  vertical-align:middle;
+  padding-top: 0.75rem;
+  text-align:center;
+}
+
+.header-icon:hover
+{
+  border-radius: 50%;
+  color: #ACBEC8;
+}
+
+.button
+{
+  border: none;
+  background: none;
+}
+
+.dropdown-menu
+{
+  margin-top: 1rem;
+  size: auto;
+}
+
+.dropdown-item
+{
+  size: auto;
+}
+
+.logout-icon
+{
+  color: #97AFBE;
+  font-size: 2rem;
+}
+
+.logout-icon:hover
+{
+  border-radius: 50%;
+  color: #ACBEC8;
+}
+

@@ -1,0 +1,64 @@
+<div class="performance-container">
+  <span *ngIf="isUser"
+        class="performance-title-text">
+    Your performance
+  </span>
+  <span *ngIf="isProjectLeader"
+        class="performance-title-text">
+    Performance in your projects
+  </span>
+  <div class="performance-row" >
+
+    <div class="icon-reported">
+      <i class="fal fa-message"></i>
+    </div>
+    <div class="reported-container">
+      <span class="reported-title-text">
+        Reported:
+      </span>
+      <span class="reported-count">
+        {{bugsCount}}
+      </span>
+    </div>
+
+
+    <div class="count-container">
+      <div class="icon-reported">
+        <i class="fa fa-calendar"></i>
+      </div>
+      <div class="reported-container">
+        <span class="reported-title-text">
+          Reported this month:
+        </span>
+        <span class="reported-count">
+
+          {{bugsCountThisMonth}}</span>
+      </div>
+    </div>
+
+    <div class="count-container">
+      <div class="icon-reported">
+        <i class="fa fa-check"></i>
+      </div>
+      <div class="reported-container">
+        <span class="reported-title-text">
+          Fixed:
+        </span>
+        <span class="reported-count">
+          {{bugsCountByStatus}}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <button (click)="downloadReport()"
+          class="view-report-button">
+    <i class="fal fa-file"></i>
+    <span>
+      Get Complete Report
+    </span>
+  </button>
+</div>
+
+<router-outlet></router-outlet>
+

@@ -1,0 +1,117 @@
+.button
+{
+  border: none;
+  background: none;
+}
+
+.dropdown-menu, .dropdown-menu-short
+{
+  margin-top: 1rem;
+  height: auto;
+  max-height: 20.4rem;
+  width: 380px;
+  overflow: hidden;
+  overflow-y: auto;
+  position: absolute;
+  border: solid white 5px;
+}
+
+.dropdown-menu-short
+{
+  height: 3rem;
+  width: 10rem;
+}
+
+.dropdown-item
+{
+  width: 350px;
+  height: 7.3rem;
+  border-radius: 10px;
+  border: solid #E9F4FF 2px;
+  margin-bottom: 0.3rem;
+}
+
+.dropdown-item:hover
+{
+  background-color: #F1F8FF;
+}
+
+.notification-button
+{
+  background: none;
+  border: none;
+  text-align: left;
+  height: 7rem;
+}
+
+.sender-profile-picture
+{
+  width: 3rem;
+  height: 3rem;
+  position: relative;
+  margin-bottom: 4.5rem;
+  margin-right: 0.7rem;
+  border-radius: 50%;
+  background-color: #ECECEC;
+}
+
+.notification-title
+{
+  color: #555555;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notification-description
+{
+  width: 250px;
+  color: #9e9e9e;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notification-send-date
+{
+  font-size: 12px;
+  color: #555555;
+}
+
+.fa-dot-circle
+{
+  font-size: 12px;
+  position: absolute;
+  margin-top: 2rem;
+  margin-left: 19.5rem;
+  color: #2580B6;
+}
+
+.notifications-count
+{
+  position: absolute;
+  margin-left: 1.8rem;
+  font-size: 11px;
+  font-weight: bold;
+  font-style: normal;
+  color: white;
+  border-radius: 50%;
+  background: red;
+  width: 16px;
+  height: 16px;
+}
+
+.notification-container
+{
+  width: 250px;
+  display: inline-block;
+  margin-right: 0.3rem;
+}
+
+.no-notification-text
+{
+  margin-left: 1.25rem;
+}
+

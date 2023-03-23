@@ -1,0 +1,84 @@
+  <form *ngIf="currentBug != undefined"
+        [formGroup]="editIssueFormGroup"
+        (ngSubmit)="onSubmit()"
+        class="add-edit-form">
+    <div>
+      <i class="fal fa-triangle-exclamation header-icon"></i>
+      <label class="add-edit-label">
+        Issue
+      </label>
+      <input type="text"
+             formControlName="name"
+             placeholder="Enter issue name"
+             class="form-control input">
+    </div>
+    <div class="inline-input-left">
+      <i class="fal fa-boxes header-icon"></i>
+      <label class="add-edit-label">
+        Classification
+      </label>
+      <select formControlName="classification"
+              class="dropdown" >
+        <option *ngFor="let classification of classificationOptions"
+                [ngValue]="classification.option">
+          {{classification.option}}
+        </option>
+      </select>
+    </div>
+
+    <div class="inline-input-right">
+      <i class="fa fa-house-fire header-icon"></i>
+      <label class="add-edit-label">
+        Severity
+      </label>
+      <select formControlName="severity"
+              class="dropdown" >
+        <option *ngFor="let severity of severityOptions"
+                [ngValue]="severity.option">
+          {{severity.option}}
+        </option>
+      </select>
+    </div>
+
+    <div class="inline-input-left">
+      <i class="fa fa-code header-icon"></i>
+      <label class="add-edit-label">
+        Project
+      </label>
+      <app-select-project
+        [currentProject]="currentBug.project"
+        (projectSelectedEvent)="onProjectSelected($event)">
+      </app-select-project>
+    </div>
+
+    <div *ngIf="isUser" class="send-img-container">
+      <img src="assets/images/send.png" class="send-img" alt="">
+    </div>
+
+    <div *ngIf="isProjectLeader" class="inline-input-right">
+      <i class="fa fa-list-check header-icon"></i>
+      <label class="add-edit-label">
+        Status
+      </label>
+      <select class="dropdown" formControlName="status">
+        <option *ngFor="let status of statusOptions"
+                [value]="status.option">
+          {{status.option}}
+        </option>
+      </select>
+    </div>
+
+    <div [ngClass]="isProjectLeader ? 'description-margin' : ''">
+      <i class="fal fa-align-left header-icon"></i>
+      <label class="add-edit-label">Description</label>
+      <textarea formControlName="description"
+                placeholder="Enter a short description..."
+                type="text"
+                class="form-control input add-edit-description"></textarea>
+    </div>
+
+    <button [disabled]="disableSubmitIfFieldsMatching()" type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+<notifier-container></notifier-container>
+  <app-spinner></app-spinner>

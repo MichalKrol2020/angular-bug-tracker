@@ -1,0 +1,44 @@
+<div *ngIf="project"
+     class="project-container">
+  <button (click)="onExpandProject()"
+          type="button"
+          class="project-expand-link">
+    <i [ngClass]="!isProjectExpanded ? 'fa-chevron-circle-right' : 'fa-chevron-circle-down'"
+       class="chevron-icon fal" ></i>
+    <span class="project-name-text">
+      {{project.name}}
+    </span>
+    <span [@scale]="isProjectExpanded"
+          class="project-description-text">
+      {{project.description}}
+    </span>
+  </button>
+  <div *ngIf="isProjectLeader"
+       class="menu-icons-group menu-icons-style">
+    <button (click)="openEditProjectDialog(project)"
+            class="menu-icon-link">
+      <i class="fa-solid fa-pen menu-icon"></i>
+    </button>
+    <button (click)="onAddParticipants(project)"
+            class="menu-icon-link">
+      <i class="fa-solid fa-user-plus menu-icon"></i>
+    </button>
+    <button (click)="onDeleteProject(project)"
+            class="menu-icon-link">
+      <i class="fa fa-trash"></i>
+    </button>
+  </div>
+  <div *ngIf="modSelected == modIssues"
+       class="issues-list-component">
+    <app-bug-list [project]="project"
+                  [projectExpanded$]="projectExpandedEvent">
+    </app-bug-list>
+  </div>
+  <div *ngIf="modSelected == modParticipants"
+       class="issues-list-component" >
+    <app-participants-list [project]="project"
+                           [projectExpanded$]="projectExpandedEvent">
+    </app-participants-list>
+  </div>
+</div>
+

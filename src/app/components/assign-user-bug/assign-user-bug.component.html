@@ -1,0 +1,81 @@
+<i class="fal fa-user-plus header-icon"></i>
+<label class="add-edit-label">
+  Assign Worker
+</label>
+<div class="search-worker-container">
+  <div class="workers-search-bar">
+    <input [formControl]="searchUserFormControl"
+           type="text"
+           class="workers-input"
+           placeholder="Search for users..."/>
+    <button (click)="onSearchParticipants()"
+            type="button"
+            class="btn">
+      <i class="fa fa-search search-worker-icon"></i>
+    </button>
+  </div>
+  <div class="workers-container">
+    <ul *ngIf="workers.length != 0"
+        class="workers-list"
+        infinite-scroll
+        [infiniteScrollDistance]="1"
+        [infiniteScrollThrottle]="1000"
+        (scroll)="onScroll($event)">
+      <li *ngFor="let worker of workers"
+          class="workers-list-item">
+        <button (click)="onSelectAssignee(worker)"
+                type="button"
+                class="select-assignee-button">
+          <div class="worker-data-container">
+            <span class="worker-name-text">
+              {{worker.firstName}} {{worker.lastName}}
+            </span>
+            <span class="worker-speciality-text">
+              {{worker.speciality}}
+            </span>
+          </div>
+        </button>
+        <img [src]="worker.profileImageUrl"
+             class="worker-profile-img" alt="">
+        <hr *ngIf="workers.indexOf(worker) < workers.length - 1">
+      </li>
+    </ul>
+    <span *ngIf="workers.length == 0"
+          class="no-workers-found">
+      No workers found!
+    </span>
+  </div>
+  <div class="result-container">
+    <div *ngIf="selectedAssignee == undefined"
+         class="no-selected-container">
+      <span class="no-worker-selected">
+        No worker selected!
+      </span>
+      <span class="hint">
+        Hint: Click on worker to select
+      </span>
+    </div>
+    <div *ngIf="selectedAssignee != undefined"
+         class="selected-worker-container">
+      <div class="worker-data-container">
+        <span class="worker-name-text">
+          {{selectedAssignee.firstName}} {{selectedAssignee.lastName}}
+        </span>
+        <span class="worker-speciality-text">
+          {{selectedAssignee.speciality}}
+        </span>
+      </div>
+      <img [src]="selectedAssignee.profileImageUrl"
+           class="worker-profile-img" alt="">
+    </div>
+  </div>
+  <button [disabled]="selectedAssignee == undefined"
+          (click)="onSubmit()"
+          type="submit"
+          class="btn btn-primary submit-assign-button">
+    Submit
+  </button>
+</div>
+
+<notifier-container></notifier-container>
+<app-spinner></app-spinner>

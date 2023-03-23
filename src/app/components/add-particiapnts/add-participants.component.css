@@ -1,0 +1,28 @@
+hr
+{
+  padding: 0;
+  margin: 0;
+}
+
+.worker-item
+{
+  display: inline-block;
+  width: 220px;
+}
+
+.checkbox-container
+{
+  display: inline;
+  margin-top: 0
+}
+
+.checkbox-item
+{
+  height: 2rem;
+  margin-left: 1.5rem;
+}
+
+
+
+
+

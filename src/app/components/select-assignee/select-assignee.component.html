@@ -1,0 +1,60 @@
+<div class="dropdown select-container">
+  <div *ngIf="selectedAssignee != undefined"
+       class="select-result-container">
+    <span class="participant-credentials">
+      {{selectedAssignee.firstName}} {{selectedAssignee.lastName }}
+    </span>
+    <span class="participant-speciality speciality-inline">
+      {{selectedAssignee.speciality}}
+    </span>
+    <img [src]="selectedAssignee.profileImageUrl"
+         class="profile-img profile-img-small" alt="">
+  </div>
+  <div *ngIf="selectedAssignee == undefined"
+       class="select-result-container">
+    <span [ngClass]="disableButton ? 'select-disabled' : 'select-enabled'">
+      Set assignee (optional)
+    </span>
+  </div>
+  <button [disabled]="disableButton"
+          class="button trigger-dropdown-button"
+          type="button"
+          id="dropdownMenuButton"
+          data-bs-toggle="dropdown"
+          data- aria-expanded="false">
+  </button>
+  <ul class="dropdown-menu dropdown-list"
+      aria-labelledby="dropdownMenuButton"
+      infinite-scroll
+      [infiniteScrollDistance]="1"
+      [infiniteScrollThrottle]="1000"
+      (scroll)="onScroll($event)">
+    <li *ngIf="participants.length == 0">
+      <span class="no-participants-text">
+        No participants!
+      </span>
+    </li>
+    <li class="dropdown-item select-none-item">
+      <button type="button"
+              class="select-none-button"
+              (click)="onSelectAssignee(undefined)">
+        <span class="participant-credentials select-none-text">
+          Select none
+        </span>
+      </button>
+    </li>
+    <li *ngFor="let participant of participants"
+        class="dropdown-item" >
+      <button type="button"
+              (click)="onSelectAssignee(participant)"
+              class="select-participant-button">
+        <img [src]="participant.profileImageUrl"
+             alt="sender-img" class="profile-img">
+        <div class="credentials-container">
+          <span class="participant-credentials">{{participant.firstName}} {{participant.lastName }}</span>
+          <span style="display: block" class="participant-speciality">{{participant.speciality}}</span>
+        </div>
+      </button>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glassmorphism login page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" crossorigin="anonymous"/>
+</head>
+<body>
+<img src="assets/images/bug-tracker.jpg" alt="bug-tracker">
+<div class="container">
+  <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+    <p>Welcome</p>
+
+    <div style="margin-bottom: 0.3rem">
+      <input formControlName="email" type="email" placeholder="Email">
+      <div *ngIf="getEmailFormControl()?.invalid && (getEmailFormControl()?.dirty || getEmailFormControl()?.touched)" class="invalid-text">
+        <div *ngIf="getEmailFormControl()?.errors?.['required'] || getEmailFormControl()?.errors?.['minlength']">Please enter your Email!</div>
+      </div>
+    </div>
+   <br>
+
+    <div>
+      <input formControlName="password" type="password" placeholder="Password">
+      <div *ngIf="getPasswordFormControl()?.invalid && (getPasswordFormControl()?.dirty || getPasswordFormControl()?.touched)" class="invalid-text">
+        <div *ngIf="getPasswordFormControl()?.errors?.['required'] || getPasswordFormControl()?.errors?.['minlength']">Please enter your Password!</div>
+      </div>
+    </div>
+    <br>
+
+    <input [hidden]="showLoading" type="submit" value="Sign In">
+    <i *ngIf="showLoading" class="fas fa-spinner fa-spin loading"></i>
+    <span *ngIf="showLoading" class="loading"> Loading...</span><br>
+
+
+    <span class="login-with-text">OR LOGIN WITH</span><br><br>
+    <div class="social-links">
+      <a href="" class="shadow fb"><i class="fab fa-facebook-f"></i></a>
+      <a href="" class="shadow text-danger google"><i class="fab fa-google"></i></a>
+      <a href="" class="shadow twitter"><i class="fab fa-twitter"></i></a>
+    </div><br><br>
+    <span class="not-member-text">Not a member? </span>
+    <a href="/register" class="sign-up-text"> Sign up</a><br><br>
+    <hr><br>
+    <a href="/forgotPassword" class="forgot-password-text">Forgot Password?</a><br>
+  </form>
+
+  <link rel="stylesheet" href="/assets/css/login-register.css">
+</div>
+</body>
+<notifier-container></notifier-container>
+</html>

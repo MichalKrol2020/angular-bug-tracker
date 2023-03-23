@@ -1,0 +1,82 @@
+<div @inOut *ngIf="isProjectExpanded" >
+  <div class="bugs-participants-list-container">
+    <div *ngIf="bugs.length == 0">
+      <img src="assets/images/empty-full.jpg"
+           class="no-bugs-found-img" alt="">
+    </div>
+  <table *ngIf="bugs.length != 0">
+    <thead class="bugs-users-thead">
+    <tr>
+      <th *ngFor="let item of tableData"
+          [ngClass]="getTableHeaderClass(item)" >
+        <button (click)="onChangeSortOrder(item.orderBy)"
+           type="button"
+           class="sort-button">
+          {{item.label}}
+          <i class="fal fa-sort">
+          </i>
+        </button>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let bug of bugs" class="bugs-participants-table-row">
+      <td>
+        <div class="name-container">
+          {{bug.name}}
+        </div>
+      </td>
+      <td>
+        {{bug.classification}}
+      </td>
+      <td>
+        {{bug.status}}
+      </td>
+      <td>
+        <span [ngClass]="getSeverityClass(bug.severity)"
+              class="severity-text">
+          {{bug.severity}}
+        </span>
+      </td>
+      <td>
+        <a routerLink="chat/{{bug.creator?.id}}"
+           class="chat-link">
+          <i class="far fa-comment-dots"></i>
+          <span>
+            {{bug.creator?.firstName}} {{bug.creator?.lastName}}
+          </span>
+        </a>
+      </td>
+      <td>
+        <a *ngIf="bug.assignee != undefined"
+           routerLink="chat/{{bug.assignee.id}}"
+           class="chat-link">
+          <i class="far fa-comment-dots"></i>
+          <span>
+            {{bug.assignee.firstName}} {{bug.assignee.lastName}}
+          </span>
+        </a>
+        <span *ngIf="bug.assignee == undefined"
+              class="not-assigned-text" >
+          Not assigned
+        </span>
+      </td>
+      <td>
+        {{getDate(bug.creationDate)}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<ngb-pagination *ngIf="bugs.length != 0"
+                class="pagination"
+                [(page)]="page"
+                [pageSize]="size"
+                [collectionSize]="totalElements"
+                [maxSize]="5"
+                (pageChange)="listBugs()">
+</ngb-pagination>
+</div>
+
+<router-outlet></router-outlet>

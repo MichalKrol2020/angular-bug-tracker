@@ -1,0 +1,124 @@
+.theme-graphic
+{
+  position: absolute;
+  height: 60%;
+  min-height: 26rem;
+  top: 15rem;
+  margin-left: 2rem
+}
+
+.notification-container
+{
+  position: absolute;
+  display: inline-block;
+  padding-top: 0.5rem;
+  width: 40rem;
+  margin: 2rem 2rem 0 40%;
+  height: 67vh;
+  min-height: 450px;
+  background: #F2F2F2;
+  box-shadow: 0 0 4rem rgba(0, 0, 0, 0.1);
+  border-color: #D9D9D9;
+  border-style: solid;
+  border-width: 0.1rem;
+}
+
+.button-container
+{
+  margin-left: 13rem;
+  margin-top: 0.5rem
+}
+
+.button
+{
+  width: 5rem; height: 2rem; border-radius: 15px; border: none;
+}
+
+.button:hover
+{
+  filter: brightness(90%);
+}
+
+.button-every
+{
+  margin-right: 2rem;
+}
+
+.button-active
+{
+  background-color: rgba(153, 204, 255, 30%);  color:  #0080ff
+}
+
+.button-inactive
+{
+  background-color: #E7E7E7;  color:  #3B3B3B
+}
+
+.notification-list
+{
+  list-style: none;
+  height: calc(100% - 9rem)
+}
+
+.notification-item
+{
+  min-height: 5rem;
+  margin-bottom: 0.5rem;
+}
+
+.sender-profile-picture
+{
+  width: 3rem;
+  height: 3rem;
+  position: absolute;
+  margin-bottom: 3rem;
+  margin-right: 0.7rem;
+  border-radius: 50%;
+  background-color: #ECECEC;
+}
+
+.notification-content
+{
+  display: inline-block;
+  margin-left: 4rem
+}
+
+.notification-description
+{
+  display: block;
+  width: 500px
+}
+
+.pagination
+{
+  position: relative;
+  justify-content: right;
+  margin-right: 1rem;
+}
+
+.sender-full-name
+{
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notification-send-date
+{
+  font-size: 14px;
+  color: #555555;
+}
+
+
+.blink_me {
+  animation: blinker 0.5s 2 ease-in-out;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+

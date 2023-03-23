@@ -1,0 +1,50 @@
+<div *ngIf="showWarningIfProjectChangeDetected()"
+     class="warning-container">
+  <span class="warning-text">
+    If you change the project, current assignee will be unassigned!
+  </span>
+</div>
+<div class="dropdown select-container"
+     [ngClass]="invalid ? 'select-invalid' : 'select-normal'">
+  <div *ngIf="selectedProject != undefined"
+       class="select-result-container">
+    <span class="project-name-text">
+      {{selectedProject.name}}
+    </span>
+  </div>
+  <div *ngIf="selectedProject == undefined"
+       class="select-result-container">
+    <span class="select-enabled">
+      Choose project
+    </span>
+  </div>
+  <button class="button trigger-dropdown-button"
+          type="button"
+          id="dropdownMenuButton"
+          data-bs-toggle="dropdown"
+          data- aria-expanded="false">
+  </button>
+  <ul class="dropdown-menu dropdown-list"
+      aria-labelledby="dropdownMenuButton"
+      infinite-scroll
+      [infiniteScrollDistance]="1"
+      [infiniteScrollThrottle]="1000"
+      (scroll)="onScroll($event)">
+    <li *ngIf="projects.length == 0">
+      <span class="no-projects">
+        No projects found!
+      </span>
+    </li>
+    <li  *ngFor="let project of projects"
+         class="dropdown-item">
+      <button type="button"
+              class="select-project-button"
+              (click)="onSelectProject(project)">
+        <span class="project-name-text">
+          {{project.name}}
+        </span>
+      </button>
+    </li>
+  </ul>
+</div>
+

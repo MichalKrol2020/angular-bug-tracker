@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light header">
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home/issues">Issues</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home/bugs">Projects</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="d-flex align-items-center">
+      <div class="icon-group">
+        <app-inbox></app-inbox>
+        <app-user-notification></app-user-notification>
+      </div>
+
+      <div class="profile-link-container">
+        <a routerLink="/home/profile"
+          class="d-flex align-items-center profile-link"
+          role="button">
+          <img class="profile-picture"
+            src="{{currentUser.profileImageUrl}}"
+            height="25"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"/>
+          <div>
+            <span class="profile-text">
+              {{currentUser.firstName}} {{currentUser.lastName}}
+            </span>
+            <br>
+            <span class="role-text">
+              @{{userRoleMap[currentUser.role]}}
+            </span>
+          </div>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuAvatar">
+
+          <li>
+            <a class="dropdown-item" href="#">My profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Settings</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Logout</a>
+          </li>
+        </ul>
+      </div>
+      <button class="button" (click)="onLogout()">
+        <i class="fa fa-power-off logout-icon"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+

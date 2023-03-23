@@ -1,0 +1,25 @@
+<div class="vh-100 d-flex justify-content-center align-items-center">
+  <div class="col-md-4">
+    <div class="border border-3 border-success"></div>
+    <div class="card  bg-white shadow p-5">
+      <div class="mb-4 text-center">
+        <i [ngClass]="isActivationSuccessful ? 'fal fa-check-circle' : 'fal fa-circle-xmark'"></i>
+      </div>
+      <div  class="text-center">
+        <h1 *ngIf="isActivationSuccessful">
+          Account confirmed!
+        </h1>
+        <h1 *ngIf="!isActivationSuccessful">
+          An error occurred!
+        </h1>
+        <p>Go back to login page</p>
+        <button routerLink="/login"
+                class="btn btn-outline-success">
+          Login
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<notifier-container></notifier-container>
+

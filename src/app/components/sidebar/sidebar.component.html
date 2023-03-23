@@ -1,0 +1,64 @@
+<div  [ngClass]="isSideNavCollapsed ? 'sidenav-collapsed': ''"
+      class="sidenav">
+  <div class="logo-container">
+    <button (click)="onCollapseSidenav()"
+            class="logo" >
+      <img src="assets/images/bug.jpg"
+           class="logo-image"
+           alt="">
+    </button>
+    <div @fadeInOut
+         *ngIf="!isSideNavCollapsed"
+         class="logo-text">
+      BugTracker
+    </div>
+    <button @rotate
+            *ngIf="!isSideNavCollapsed"
+            (click)="onCloseSidenav()"
+            class="btn-close" >
+      <i class="fal fa-times close-icon"></i>
+    </button>
+  </div>
+  <ul class="sidenav-nav">
+    <li *ngFor="let data of navData"
+        class="sidenav-nav-item" >
+        <!--
+              RouterLinkActive - Tracks whether the linked route of an element is currently active,
+              and allows you to specify one or more CSS classes to add to the element when the linked route is active.
+
+              To add the classes only when the URL matches the link exactly, add the option exact: true
+
+              -->
+      <a class="sidenav-nav-link" routerLink="{{data.routerLink}}"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: false}">
+        <i [class]="data.icon"
+           class="sidenav-link-icon"></i>
+        <span @fadeInOut
+              *ngIf="!isSideNavCollapsed"
+              class="sidenav-link-text" >
+          {{data.label}}
+        </span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item">
+      <a (click)="onExpandChatList()"
+         class="sidenav-nav-link">
+        <i class="sidenav-link-icon fal fa-comment-alt"></i>
+        <span @fadeInOut
+              *ngIf="!isSideNavCollapsed"
+              class="sidenav-link-text" >
+          Users
+        </span>
+        <i *ngIf="!isSideNavCollapsed"
+           [ngClass]="!isChatListExpanded ? 'fas fa-angle-right' : 'fas fa-angle-down'"
+           class="menu-collapse-icon"></i>
+      </a>
+      <app-chat-list
+        [sideNavCollapsed]="isSideNavCollapsed"
+        [chatListExpanded]="isChatListExpanded">
+      </app-chat-list>
+    </li>
+  </ul>
+</div>

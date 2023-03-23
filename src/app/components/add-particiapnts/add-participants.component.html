@@ -1,0 +1,65 @@
+<i class="fal fa-user-plus header-icon"></i>
+<label class="add-edit-label">
+  Add participants
+</label>
+<label *ngIf="!project"
+       class="label-optional">
+  (optional)
+</label>
+<div class="search-worker-container">
+  <div class="workers-search-bar">
+    <input [formControl]="searchUserFormControl"
+           type="text"
+           class="workers-input"
+           placeholder="Search for users..."/>
+    <button (click)="onSearchWorkers()"
+            type="button"
+            class="btn">
+      <i class="fa fa-search search-worker-icon"></i>
+    </button>
+  </div>
+  <div class="workers-container">
+    <ul *ngIf="workers.length != 0"
+        class="workers-list"
+        infinite-scroll
+        [infiniteScrollDistance]="1"
+        [infiniteScrollThrottle]="1000"
+        (scroll)="onScroll($event)">
+      <li *ngFor="let worker of workers"
+          class="workers-list-item">
+        <div class="worker-item">
+          <div class="checkbox-container">
+            <input [value]="worker"
+                   (change)="onCheckboxChange($event, worker)"
+                   type="checkbox"
+                   class="checkbox-item">
+          </div>
+          <div class="worker-data-container">
+            <span class="worker-name-text">
+              {{worker.firstName}} {{worker.lastName}}
+            </span>
+            <span class="worker-speciality-text">
+              {{worker.speciality}}
+            </span>
+          </div>
+        </div>
+        <img [src]="worker.profileImageUrl"
+             class="worker-profile-img" alt="">
+        <hr *ngIf="workers.indexOf(worker) < workers.length - 1">
+      </li>
+    </ul>
+    <span *ngIf="workers.length == 0"
+          class="no-workers-found">
+      No workers found!
+    </span>
+  </div>
+</div>
+
+<button [disabled]="participants.length == 0"
+        (click)="onSubmit()"
+        class="btn btn-primary">
+  Submit
+</button>
+
+<notifier-container></notifier-container>
+<app-spinner></app-spinner>

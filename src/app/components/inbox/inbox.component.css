@@ -1,0 +1,25 @@
+#inbox-container
+{
+  height: 300px;
+  width: 300px;
+  margin-left: 0;
+  text-align: center;
+}
+
+.button
+{
+  border: none;
+  background: none;
+}
+
+.dropdown-menu
+{
+  height: 320px;
+  width: 320px;
+  padding-left: 10px;
+}
+
+.dropdown-item
+{
+  size: auto;
+}

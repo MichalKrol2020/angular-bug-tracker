@@ -1,0 +1,55 @@
+<div class="dropdown">
+  <button type="button"
+          id="dropdownMenuButton"
+          data-bs-toggle="dropdown"
+          data- aria-expanded="false"
+          class="button">
+    <i *ngIf="countNotificationsUnseen != 0"
+       class="notifications-count">
+      {{countNotificationsUnseen}}
+    </i>
+    <i class="fal fa-bell notification-icon"></i>
+  </button>
+  <ul [ngClass]="notifications.length == 0 ? 'dropdown-menu-short' : ''"
+      aria-labelledby="dropdownMenuButton"
+      class="dropdown-menu"
+      infinite-scroll
+      [infiniteScrollDistance]="1"
+      [infiniteScrollThrottle]="1000"
+      (scroll)="onScroll($event)">
+    <li *ngIf="notifications.length == 0">
+      <span class="no-notification-text">
+        No notifications!
+      </span>
+    </li>
+    <li *ngFor="let notification of notifications"
+        class="dropdown-item">
+      <button class="notification-button"
+              (click)="onClickNotification(notification)">
+        <i *ngIf="!notification.seen"
+           class="fa fa-dot-circle"></i>
+        <div>
+          <img *ngIf="notification.sender"
+               [src]="notification.sender.profileImageUrl"
+               alt="sender-img"
+               class="sender-profile-picture">
+          <div class="notification-container">
+            <span *ngIf="notification.sender">
+              {{notification.sender.firstName}} {{notification.sender.lastName }}:
+            </span>
+            <span class="notification-title">
+              {{notification.title}}
+            </span>
+            <span class="notification-description">
+              {{notification.description}}
+            </span>
+            <span class="notification-send-date">
+              {{getTimeSinceSendDate(notification)}}
+            </span>
+          </div>
+        </div>
+      </button>
+    </li>
+  </ul>
+</div>
+

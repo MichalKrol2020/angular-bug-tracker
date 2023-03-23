@@ -1,0 +1,53 @@
+<ul class="sublevel-nav"
+    [@dropdown]="chatListExpanded ? {value: 'visible', params: {transitionParams: '500ms cubic-bezier(0.86, 0, 0.07, 1)', height: '*'}}
+                          : {value: 'hidden' , params: {transitionParams: '500ms cubic-bezier(0.86, 0, 0.07, 1)', height: '0'}}">
+  <div *ngIf="!sideNavCollapsed"
+       @fadeInOut
+       class="search-bar">
+    <input [formControl]="searchUserFormControl"
+           type="text"
+           placeholder="Search for users..."
+           class="search-bar-input" />
+    <a (click)="onSearchUser()">
+      <i class="fal fa-search"></i>
+    </a>
+  </div>
+  <div *ngIf="!sideNavCollapsed" @fadeInOut>
+    <div *ngIf="users?.length == 0"
+         class="no-users-found" >
+      No users found :(
+    </div>
+  </div>
+  <div *ngIf="!sideNavCollapsed"
+       @fadeInOut
+       infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="1000"
+       (scroll)="onScroll($event)"
+       class="scroll-box">
+
+    <li *ngFor="let tempUser of users"
+        class="sublevel-nav-item">
+
+      <a routerLink="{{route}}/chat/{{tempUser.id}}"
+         routerLinkActive="active-sublevel"
+         [routerLinkActiveOptions]="{exact:true}"
+         class="sublevel-nav-link">
+
+        <img [src]="tempUser.profileImageUrl"
+             class="sublevel-profile-picture"  alt="">
+
+        <span *ngIf="!sideNavCollapsed"
+              class="sublevel-link-text">
+          {{tempUser.firstName}} {{tempUser.lastName}}
+        </span>
+      </a>
+    </li>
+  </div>
+</ul>
+
+
+
+
+
+

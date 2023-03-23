@@ -1,0 +1,91 @@
+<div>
+  <form [formGroup]="createProjectFormGroup"
+        (ngSubmit)="onSubmit()">
+    <div>
+      <i class="fal fa-file-code header-icon"></i>
+      <label class="add-edit-label">
+        Project Name
+      </label>
+      <div class="input-container">
+        <input type="text"
+               formControlName="name"
+               placeholder="Enter project name"
+               class="form-control input">
+      </div>
+    </div>
+
+    <div>
+      <i class="fal fa-align-left header-icon"></i>
+      <label class="add-edit-label">
+        Description
+      </label>
+      <div class="input-container">
+        <textarea type="text"
+                  formControlName="description"
+                  placeholder="Enter a short description..."
+                  class="form-control input project-description" >
+        </textarea>
+      </div>
+    </div>
+      <i class="fal fa-user-plus header-icon"></i>
+      <label class="add-edit-label">
+        Add participants
+      </label>
+      <label class="label-optional">
+        (optional)
+      </label>
+      <div class="input-container">
+        <div class="search-bar">
+          <input [formControl]="searchUserFormControl"
+                 type="text"
+                 placeholder="Search for users..."
+                 class="search-bar-input"/>
+          <button (click)="onSearchWorker()"
+                  type="button"
+                  class="fa fa-search search-worker-icon">
+          </button>
+        </div>
+        <div class="workers-container">
+          <ul *ngIf="workers.length != 0" class="workers-list" infinite-scroll
+              [infiniteScrollDistance]="1"
+              [infiniteScrollThrottle]="1000"
+              (scroll)="onScroll($event)">
+            <li *ngFor="let worker of workers"
+                class="workers-list-item">
+              <div class="worker-item">
+                <div class="checkbox-container">
+                  <input [value]="worker"
+                         (change)="onCheckboxChange($event, worker)"
+                         type="checkbox"
+                         class="checkbox-item">
+                </div>
+                <div class="worker-data-container">
+                  <span class="worker-name-text">
+                    {{worker.firstName}} {{worker.lastName}}
+                  </span>
+                  <span class="worker-speciality-text">
+                    {{worker.speciality}}
+                  </span>
+                </div>
+              </div>
+              <img [src]="worker.profileImageUrl"
+                   class="worker-profile-img"
+                   alt="">
+              <hr *ngIf="workers.indexOf(worker) < workers.length - 1">
+            </li>
+          </ul>
+          <span *ngIf="workers.length == 0"
+                class="no-workers-found">
+            No workers found!
+          </span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary">
+        Submit
+      </button>
+  </form>
+</div>
+
+<notifier-container></notifier-container>
+<app-spinner></app-spinner>

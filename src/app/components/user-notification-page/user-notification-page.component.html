@@ -1,0 +1,50 @@
+<div class="page-body">
+  <img src="assets/images/notification.jpg"
+       alt=""
+       class="theme-graphic" >
+
+  <div class="notification-container">
+    <div class="button-container">
+      <button class="button button-active button-every">
+        Every
+      </button>
+      <button class="button button-inactive">
+        Newest
+      </button>
+    </div>
+    <hr>
+    <ul class="notification-list">
+      <li [class]="getAnimationClass(notification)"
+          *ngFor="let notification of notifications"
+          class="notification-item">
+        <img  *ngIf="notification.sender"
+              [src]="notification.sender.profileImageUrl"
+              alt=""
+              class="sender-profile-picture">
+        <div class="notification-content">
+          <span>
+            {{notification.title}}
+          </span>
+          <span class="notification-description">
+            {{notification.description}}
+          </span>
+          <span class="notification-send-date">
+            {{getTimeSinceSendDate(notification)}}
+          </span>
+        </div>
+      </li>
+    </ul>
+    <ngb-pagination class="pagination"
+                    [(page)]="pageNumber"
+                    [pageSize]="pageSize"
+                    [collectionSize]="totalElements"
+                    [maxSize]="maxPagesNumberToShow"
+                    (pageChange)="getNotificationsByReceiver()">
+    </ngb-pagination>
+  </div>
+
+</div>
+
+
+<router-outlet></router-outlet>
+

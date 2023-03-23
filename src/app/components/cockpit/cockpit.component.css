@@ -1,0 +1,134 @@
+.performance-container
+{
+  padding-top: 0.5rem;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  height: 270px;
+  background: #F2F2F2;
+  box-shadow: 0 0 4rem rgba(0, 0, 0, 0.1);
+  border-color: #D9D9D9;
+  border-style: solid;
+  border-width: 0.1rem;
+}
+
+.performance-title-text
+{
+  display: inline-block;
+  margin-left: 2rem;
+  font-size: 20px;
+  color: #616161;
+}
+
+.project-leader-title
+{
+  margin-left: 0.4rem;
+}
+
+.performance-row
+{
+  margin-top: 0.5rem;
+  border-color: #D9D9D9;
+  border-style: solid;
+  border-left: none;
+  border-right: none;
+  border-width: 0.1rem;
+  width: 100%;
+  height: 150px;
+  display: inline-block;
+  padding-top: 1rem;
+}
+
+.count-container
+{
+  margin-left: 27%;
+  display: inline-block
+}
+
+.fa-message
+ {
+  margin-left: 2rem;
+  margin-top: 1.4rem;
+   font-size: 40px;
+   height: 70px;
+   width: 70px;
+   border-radius: 50%;
+   padding-left: 0.95rem;
+   padding-top: 1.1rem;
+   background-color: tomato;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2)
+}
+
+.fa-check
+{
+  margin-top: 1.4rem;
+  font-size: 40px;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  padding-left: 0.9rem;
+  padding-top: 1.1rem;
+  background-color: lightgreen;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2)
+}
+
+.fa-calendar
+{
+  margin-top: 1.4rem;
+  font-size: 40px;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  padding-left: 1.1rem;
+  padding-top: 0.9rem;
+  background-color: #F3BA2B;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2)
+}
+
+
+.fa-file
+{
+  margin-right: 0.7rem;
+  color: white
+}
+
+.icon-reported
+{
+  display: inline-block;
+}
+
+.reported-count
+{
+  line-height: 5rem;
+  font-size: 60px;
+  color: #083F5F;
+}
+
+.reported-container
+{
+  display: inline-block;
+  position: absolute;
+  margin-left: 1rem;
+}
+
+.reported-title-text
+{
+  display: block;
+  font-size: 16px;
+  color: #9C9C9C;
+}
+
+.view-report-button
+{
+  color: white;
+  margin-left: calc( 50% - 10rem);
+  margin-top: 1rem;
+  width: 15rem;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  background-color: #2A71B0;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+}
+
+

@@ -1,0 +1,25 @@
+<form [formGroup]="setBugStatusFormGroup"
+      (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <i class="fa fa-list-check header-icon"></i>
+    <label class="add-edit-label">
+      Set status
+    </label>
+    <select (ngModelChange)="onSelectOption()"
+            formControlName="status"
+            class="dropdown">
+      <option value="" disabled selected hidden>
+        Select status
+      </option>
+      <option *ngFor="let status of statusOptions"
+              [ngValue]="status.option">
+        {{status.option}}
+      </option>
+    </select>
+  </div>
+  <button [disabled]="submitDisabled"
+          type="submit"
+          class="btn btn-primary">
+    Submit
+  </button>
+</form>

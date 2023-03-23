@@ -1,0 +1,59 @@
+<div *ngIf="projects != undefined"
+     class="bugs-container">
+  <select *ngIf="isProjectLeader"
+          [(ngModel)]="modSelected"
+          (ngModelChange)="onModChange()"
+          class="mod-selector">
+    <option *ngFor="let mod of tableProjectsMods"
+            [ngValue]="mod.option">
+      {{mod.option}}
+    </option>
+  </select>
+  <button *ngIf="isProjectLeader"
+          (click)="openCreateProjectDialog()"
+          class="new-project-button">
+    New Project
+  </button>
+  <table *ngIf="projects.length != 0"
+         class="table">
+    <thead>
+    <tr>
+      <th [ngClass]="getTableHeaderClass(item)"
+          *ngFor="let item of tableData">
+        <button (click)="onChangeSortOrder(item.orderBy)"
+                type="button"
+                class="sort-button">
+          {{item.label}}
+          <i class="fal fa-sort"></i>
+        </button>
+      </th>
+    </tr>
+    </thead>
+    <hr>
+    <tr *ngFor="let project of projects"
+        class="table-row">
+      <app-project
+        [project]="project"
+        [modSelectedChanged$]="modSelectedChangedEvent"
+        (reloadProjectsRequestedEvent)="onReloadProjectsRequested()" >
+      </app-project>
+    </tr>
+  </table>
+  <div class="no-projects-span">
+    <span *ngIf="projects.length == 0">
+      You are not assigned to any project!
+    </span>
+  </div>
+
+  <ngb-pagination [(page)]="page"
+                  [pageSize]="size"
+                  [collectionSize]="totalElements"
+                  [maxSize]="5"
+                  (pageChange)="listProjects()"
+                  class="pagination">
+  </ngb-pagination>
+</div>
+
+<router-outlet></router-outlet>
+<notifier-container></notifier-container>
+

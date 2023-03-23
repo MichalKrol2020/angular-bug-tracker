@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glassmorphism login page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" crossorigin="anonymous"/>
+</head>
+
+<body>
+<img src="assets/images/bug-tracker.jpg"
+     alt="bug-tracker">
+<div class="container register-container">
+  <form [formGroup]="registerFormGroup"
+        (ngSubmit)="onSubmit()">
+    <p>Welcome</p>
+    <input formControlName="firstName"
+           placeholder="First Name"
+           type="text">
+    <div *ngIf="getFirstName()?.invalid && (getFirstName()?.dirty || getFirstName()?.touched)"
+         class="invalid-text">
+      <div *ngIf="getFirstName()?.errors?.['required'] || getFirstName()?.errors?.['minlength']">
+        Please enter your First Name!
+      </div>
+    </div><br>
+
+    <input formControlName="lastName"
+           placeholder="Last Name"
+           type="text" >
+    <div *ngIf="getLastName()?.invalid && (getLastName()?.dirty || getLastName()?.touched)"
+         class="invalid-text">
+      <div *ngIf="getLastName()?.errors?.['required'] || getLastName()?.errors?.['minlength']">
+        Please enter your Last Name!
+      </div>
+    </div><br>
+
+    <input formControlName="email"
+           placeholder="Email"
+           type="email" >
+    <div *ngIf="getEmail()?.invalid && (getEmail()?.dirty  || getEmail()?.touched)"
+         class="invalid-text">
+      <div *ngIf="getEmail()?.errors?.['required'] || getEmail()?.errors?.['minlength']">
+        Please enter your Email!
+      </div>
+    </div><br>
+
+    <select formControlName="speciality"
+            class="input-select" >
+      <option value="" disabled selected hidden>
+        Choose speciality
+      </option>
+      <option *ngFor="let speciality of userSpecialities">
+        {{speciality.option}}
+      </option>
+    </select>
+    <div *ngIf="getSpeciality()?.invalid && (getSpeciality()?.dirty  || getSpeciality()?.touched)"
+         class="invalid-text">
+      <div *ngIf="getSpeciality()?.errors?.['required']">
+        Please select your speciality!!
+      </div>
+    </div><br>
+
+    <input formControlName="password"
+           placeholder="Password"
+           type="password" >
+    <div *ngIf="getPassword()?.invalid && (getPassword()?.dirty || getPassword()?.touched)"
+         class="invalid-text">
+      <div *ngIf="getPassword()?.errors?.['required'] || getPassword()?.errors?.['minlength']">
+        Please enter your Password!
+      </div>
+    </div><br>
+
+    <input formControlName="matchingPassword"
+           placeholder="Repeat Password"
+           type="password">
+    <div *ngIf="getMatchingPassword()?.invalid && (getMatchingPassword()?.dirty || getMatchingPassword()?.touched)"
+         class="invalid-text">
+      <div *ngIf="getMatchingPassword()?.errors?.['matchingPassword']">
+        Passwords has to match!
+      </div>
+    </div><br>
+
+    <input [hidden]="showLoading"
+           type="submit"
+           value="Sign Up">
+
+    <i *ngIf="showLoading"
+       class="fas fa-spinner fa-spin loading"></i>
+    <span *ngIf="showLoading"
+          class="loading"></span><br>
+
+    <span class="login-with-text">
+      OR LOGIN WITH
+    </span><br>
+    <div class="social-links">
+      <a href="" class="shadow fb">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="" class="shadow text-danger google">
+        <i class="fab fa-google"></i>
+      </a>
+      <a href="" class="shadow twitter">
+        <i class="fab fa-twitter">
+        </i>
+      </a>
+    </div><br><br>
+    <span class="already-have-account-text">
+      Already have an account?
+    </span>
+    <a href="/login" class="login-text">
+      Login
+    </a>
+    <br>
+  </form>
+
+  <link rel="stylesheet" href="/assets/css/login-register.css">
+</div>
+</body>
+<notifier-container></notifier-container>
+</html>

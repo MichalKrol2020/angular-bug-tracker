@@ -1,0 +1,24 @@
+<div>
+  <form [formGroup]="editProjectFormGroup" (ngSubmit)="onSubmit()">
+    <div>
+      <i class="fal fa-file-code header-icon"></i>
+      <label class="add-edit-label">Project Name</label>
+      <div class="input-container">
+        <input type="text" formControlName="name" class="form-control input" placeholder="Enter project name" >
+      </div>
+    </div>
+
+    <div>
+      <i class="fal fa-align-left header-icon"></i>
+      <label class="add-edit-label">Description</label>
+      <div class="input-container">
+        <textarea type="text" formControlName="description" class="form-control input project-description" placeholder="Enter a short description...">
+        </textarea>
+      </div>
+    </div>
+    <button [disabled]="disableSubmitIfFieldsMatching()" type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<notifier-container></notifier-container>
+<app-spinner></app-spinner>
