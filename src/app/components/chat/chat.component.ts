@@ -28,7 +28,7 @@ export class ChatComponent implements OnInit
   }
 
 
-  private handlePopupChat()
+  private handlePopupChat(): void
   {
     if(!this.route.snapshot.paramMap.has('id') )
     {
@@ -50,8 +50,7 @@ export class ChatComponent implements OnInit
 
 
 
-
-  private async preloadChatPopup(otherAppUser: User)
+  private async preloadChatPopup(otherAppUser: User): Promise<void>
   {
     const chatPopup = await this.talkService.createPopup(otherAppUser, true);
     this.chatPopup = chatPopup;
@@ -61,7 +60,7 @@ export class ChatComponent implements OnInit
 
 
 
-  ngOnDestroy()
+  ngOnDestroy(): void
   {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
