@@ -40,7 +40,7 @@ export class ChatListComponent implements OnInit
     this.listAllUsers();
   }
 
-  private onChatLinkRouteChange()
+  private onChatLinkRouteChange(): void
   {
     this.subscriptions.push(
       this.router.events.pipe
@@ -51,7 +51,7 @@ export class ChatListComponent implements OnInit
       }));
   }
 
-  private listAllUsers()
+  private listAllUsers(): void
   {
     this.subscriptions.push(
     this.userService.getUsers(this.page, this.size).subscribe
@@ -68,7 +68,7 @@ export class ChatListComponent implements OnInit
     }
   }
 
-  onSearchUser()
+  onSearchUser(): void
   {
     this.page = 0;
     this.users = [];
@@ -76,7 +76,7 @@ export class ChatListComponent implements OnInit
     this.searchAllUsers();
   }
 
-  private searchAllUsers()
+  private searchAllUsers(): void
   {
     const fullName = this.searchUserFormControl.value;
 
@@ -87,7 +87,7 @@ export class ChatListComponent implements OnInit
 
 
   @HostListener('scroll', ['$event'])
-  onScroll(event: Event)
+  onScroll(event: Event): void
   {
     const target = event.target as HTMLElement
     const scrolled =
@@ -106,9 +106,11 @@ export class ChatListComponent implements OnInit
     }
   }
 
-  ngOnDestroy()
+  ngOnDestroy(): void
   {
     this.subscriptions.forEach
     ((subscription) => subscription.unsubscribe());
   }
 }
+
+
