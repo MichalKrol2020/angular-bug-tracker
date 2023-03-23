@@ -38,7 +38,7 @@ export class CockpitComponent implements OnInit
     this.setBugCount();
   }
 
-  private setBugCount()
+  private setBugCount(): void
   {
     const daysAgo = 30;
     if(this.isProjectLeader)
@@ -50,7 +50,7 @@ export class CockpitComponent implements OnInit
     }
   }
 
-  private setCountsByProjectLeader(status: string, daysAgo: number)
+  private setCountsByProjectLeader(status: string, daysAgo: number): void
   {
     this.subscriptions.push(
       this.bugService.getCountByProjectLeader(this.currentUserId).subscribe
@@ -72,7 +72,7 @@ export class CockpitComponent implements OnInit
       }));
   }
 
-  private setCountsByUser(status: string, daysAgo: number)
+  private setCountsByUser(status: string, daysAgo: number): void
   {
     this.subscriptions.push(
       this.bugService.getCountByCreator(this.currentUserId).subscribe
@@ -94,12 +94,12 @@ export class CockpitComponent implements OnInit
       }));
   }
 
-  downloadReport()
+  downloadReport(): void
   {
     this.pdfService.downloadPdf(this.currentUserId);
   }
 
-  ngOnDestroy()
+  ngOnDestroy(): void
   {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
