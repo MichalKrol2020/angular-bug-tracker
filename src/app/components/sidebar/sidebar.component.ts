@@ -1,6 +1,7 @@
 import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 import {navbarData} from "../../const/nav-data";
 import {fadeInOut, rotate} from "../../const/animations";
+import {SideNavToggle} from "../../model/side-nav-toggle";
 
 @Component({
   selector: 'app-sidebar',
@@ -27,7 +28,7 @@ export class SidebarComponent implements OnInit
   {}
 
   @HostListener('window:resize', ['$event'])
-  onResize()
+  onResize(): void
   {
     this.screenWidth = window.innerWidth;
     if(this.screenWidth <= 768)
@@ -37,7 +38,7 @@ export class SidebarComponent implements OnInit
     }
   }
 
-  onCollapseSidenav()
+  onCollapseSidenav(): void
   {
     this.isSideNavCollapsed = !this.isSideNavCollapsed;
     if(this.isChatListExpanded)
@@ -48,7 +49,7 @@ export class SidebarComponent implements OnInit
     this.emitOnToggleSideNav()
   }
 
-  onCloseSidenav()
+  onCloseSidenav(): void
   {
     this.isSideNavCollapsed = true;
     this.isChatListExpanded = false;
@@ -56,7 +57,7 @@ export class SidebarComponent implements OnInit
     this.emitOnToggleSideNav();
   }
 
-  onExpandChatList()
+  onExpandChatList(): void
   {
     if(this.isSideNavCollapsed)
     {
@@ -67,7 +68,7 @@ export class SidebarComponent implements OnInit
     this.emitOnToggleSideNav();
   }
 
-  private emitOnToggleSideNav()
+  private emitOnToggleSideNav(): void
   {
     this.onToggleSideNav.emit
     ({
@@ -75,11 +76,6 @@ export class SidebarComponent implements OnInit
       screenWidth: this.screenWidth
     });
   }
-
 }
 
-interface SideNavToggle
-{
-  screenWidth: number;
-  collapsed: boolean;
-}
+
