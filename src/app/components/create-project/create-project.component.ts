@@ -114,7 +114,7 @@ export class CreateProjectComponent implements OnInit
     return of(undefined);
   }
 
-  private onProjectCreatedSuccessfully(): (response: CustomHttpResponse | undefined) => void
+  private onProjectCreatedSuccessfully()
   {
     return (response: CustomHttpResponse | undefined) =>
     {
@@ -131,7 +131,7 @@ export class CreateProjectComponent implements OnInit
     this.notificationService.sendSuccessNotification(response.message);
   }
 
-  private onError(): (errorResponse: HttpErrorResponse) => void
+  private onError()
   {
     return (errorResponse: HttpErrorResponse) =>
     {
@@ -211,3 +211,6 @@ export class CreateProjectComponent implements OnInit
     return this.createProjectFormGroup.get('description');
   }
 }
+
+
+
