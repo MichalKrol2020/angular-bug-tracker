@@ -148,7 +148,7 @@ export class ProjectComponent implements OnInit
     return DialogUtils.openWarningDialog(dialogData, this.zone, this.dialog);
   }
 
-  private onDeleteProjectDialogClosed(): (response: Project | undefined) => void
+  private onDeleteProjectDialogClosed()
   {
     return (response: Project | undefined) =>
     {
