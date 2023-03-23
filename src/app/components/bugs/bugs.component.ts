@@ -2,7 +2,7 @@ import {Component, HostListener, NgZone, OnInit} from '@angular/core';
 import {Bug} from "../../model/bug";
 import {BugService} from "../../service/bug.service";
 import {AuthenticationService} from "../../service/authentication.service";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {EditIssueComponent} from "../edit-issue/edit-issue.component";
 import {tableIssuesModsSelectData} from "../../const/table-issues-mod";
 import {SetBugStatusComponent} from "../set-bug-status/set-bug-status.component";
@@ -34,6 +34,7 @@ import {
   BUG_STATUS_DIALOG_WIDTH, EDIT_BUG_DIALOG_HEIGHT,
   EDIT_BUG_DIALOG_WIDTH
 } from "../../const/dialog-const";
+import {WarningDialogComponent} from "../warning-dialog/warning-dialog.component";
 
 @Component({
   selector: 'app-issues',
@@ -90,7 +91,7 @@ export class BugsComponent implements OnInit
   }
 
 
-  onModChange()
+  onModChange(): void
   {
     this.tableData = this.getTableData();
     this.page = 1;
@@ -98,7 +99,7 @@ export class BugsComponent implements OnInit
   }
 
 
-  listBugs()
+  listBugs(): void
   {
     if(this.isProjectLeader)
     {
@@ -110,7 +111,7 @@ export class BugsComponent implements OnInit
   }
 
 
-  private listBugsByProjectLeader()
+  private listBugsByProjectLeader(): void
   {
     this.subscriptions.push(
       this.bugService.getBugsByProjectLeaderId(this.currentUserId, this.page - 1, this.size, this.orderBy, this.isAscending).subscribe
@@ -118,7 +119,7 @@ export class BugsComponent implements OnInit
   }
 
 
-  private listBugsByModSelected()
+  private listBugsByModSelected(): void
   {
     if(this.modSelected == BugsModEnum.ADDED_ISSUES)
     {
@@ -161,7 +162,7 @@ export class BugsComponent implements OnInit
 
 
 
-  showEditButton(bug: Bug)
+  showEditButton(bug: Bug): boolean
   {
     if(this.modSelected == BugsModEnum.ASSIGNED_ISSUES)
     {
@@ -186,7 +187,7 @@ export class BugsComponent implements OnInit
 
 
 
-  openUpdateDialog(currentBug: Bug)
+  openUpdateDialog(currentBug: Bug): void
   {
     if(this.modSelected == BugsModEnum.ADDED_ISSUES || this.isProjectLeader)
     {
@@ -197,7 +198,7 @@ export class BugsComponent implements OnInit
     }
   }
 
-  openAssignUserDialog(currentBug: Bug)
+  openAssignUserDialog(currentBug: Bug): void
   {
     this.openDialogWithContent(currentBug, AssignUserBugComponent, ASSIGN_BUG_DIALOG_WIDTH, ASSIGN_BUG_DIALOG_HEIGHT);
   }
@@ -210,7 +211,7 @@ export class BugsComponent implements OnInit
 
 
 
-  onUnassignWorkerFromBug(bug: Bug)
+  onUnassignWorkerFromBug(bug: Bug): void
   {
     const dialogRef = this.openUnassignDialog(bug)
 
@@ -231,7 +232,7 @@ export class BugsComponent implements OnInit
   }
 
 
-  private openUnassignDialog(bug: Bug)
+  private openUnassignDialog(bug: Bug): MatDialogRef<WarningDialogComponent>
   {
     const assignee = bug.assignee;
     const title = 'Do you want to unassign this worker?';
@@ -255,7 +256,7 @@ export class BugsComponent implements OnInit
     }
   }
 
-  private onWorkerUnassignedSuccessfully(bug: Bug, response: CustomHttpResponse)
+  private onWorkerUnassignedSuccessfully(bug: Bug, response: CustomHttpResponse): void
   {
     bug.assignee = undefined;
     this.notificationService.notify(NotificationType.SUCCESS, response.message);
@@ -263,7 +264,7 @@ export class BugsComponent implements OnInit
 
 
 
-  onDeleteBug(bug: Bug)
+  onDeleteBug(bug: Bug): void
   {
     const dialogRef = this.openDeleteBugDialog(bug);
 
@@ -283,7 +284,7 @@ export class BugsComponent implements OnInit
       }));
   }
 
-  private openDeleteBugDialog(bug: Bug)
+  private openDeleteBugDialog(bug: Bug): MatDialogRef<WarningDialogComponent>
   {
     const title = 'Do you want to delete this issue?';
     const description = `You are trying to delete issue: ${bug.name}.\n` +
@@ -305,7 +306,7 @@ export class BugsComponent implements OnInit
     }
   }
 
-  private onBugDeletedSuccessfully(response: CustomHttpResponse)
+  private onBugDeletedSuccessfully(response: CustomHttpResponse): void
   {
     this.listBugs();
     this.notificationService.sendSuccessNotification(response.message);
@@ -320,7 +321,7 @@ export class BugsComponent implements OnInit
     }
   }
 
-  onChangeSortOrder(orderBy: string)
+  onChangeSortOrder(orderBy: string): void
   {
     if(this.orderBy != orderBy)
     {
@@ -335,19 +336,19 @@ export class BugsComponent implements OnInit
   }
 
 
-  onBugExpand(bug: Bug)
+  onBugExpand(bug: Bug): void
   {
     bug.expanded = !bug.expanded;
   }
 
 
-  getDayMonthYear(date: Date)
+  getDayMonthYear(date: Date): string
   {
     return DateUtils.getDayMonthYear(date);
   }
 
 
-  getAssigneeName(bug: Bug)
+  getAssigneeName(bug: Bug): string
   {
     const assignee = bug.assignee;
     return !assignee ? 'Not assigned' : assignee.firstName + ' ' + assignee.lastName;
@@ -367,7 +368,7 @@ export class BugsComponent implements OnInit
     this.listBugs();
   }
 
-  private setPageData(countedSize: number)
+  private setPageData(countedSize: number): void
   {
     this.size = countedSize;
     this.currentPageHeight = window.innerHeight;
@@ -375,12 +376,12 @@ export class BugsComponent implements OnInit
   }
 
 
-  getSeverityClass(severity: String)
+  getSeverityClass(severity: String): string
   {
     return 'severity-' + severity.toLowerCase();
   }
 
-  getMenuClass()
+  getMenuClass(): string
   {
     return this.isProjectLeader ? 'menu-long' : '';
   }
@@ -396,7 +397,7 @@ export class BugsComponent implements OnInit
     }
   }
 
-  ngOnDestroy()
+  ngOnDestroy(): void
   {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
