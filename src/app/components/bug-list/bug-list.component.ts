@@ -85,7 +85,7 @@ export class BugListComponent implements OnInit
   }
 
 
-  public onChangeSortOrder(orderBy: string)
+  public onChangeSortOrder(orderBy: string): void
   {
     if(this.orderBy != orderBy)
     {
@@ -120,3 +120,6 @@ export class BugListComponent implements OnInit
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }
+
+
+
