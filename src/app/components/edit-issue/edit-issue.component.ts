@@ -24,6 +24,7 @@ import {mergeMap, Observable, of, Subscription} from "rxjs";
 import {NotificationType} from "../../enum/notification-type.enum";
 import {BugStatusProjectLeaderSelectData} from "../../const/bug-status-select-data";
 import {BugEnumMapper} from "../../enum/mapper/bug-enum-mapper";
+import {BugSeverityEnum} from "../../enum/bug-severity.enum";
 
 
 @Component({
@@ -68,7 +69,7 @@ export class EditIssueComponent implements OnInit
     this.createEditBugFormGroup();
   }
 
-  private createEditBugFormGroup()
+  private createEditBugFormGroup(): void
   {
     this.editIssueFormGroup = this.formBuilder.group
     ({
@@ -89,7 +90,7 @@ export class EditIssueComponent implements OnInit
     this.updateHeightIfProjectChanged(project);
   }
 
-  private updateHeightIfProjectChanged(project: Project)
+  private updateHeightIfProjectChanged(project: Project): void
   {
     if(!this.isProjectLeader)
     {
@@ -133,7 +134,7 @@ export class EditIssueComponent implements OnInit
     return BugEnumMapper.mapStatusToEnumName(status);
   }
 
-  private getBugSeverityValue()
+  private getBugSeverityValue(): BugSeverityEnum
   {
     const severity: string = this.getBugSeverity()?.value;
     return BugEnumMapper.mapSeverityToEnumName(severity);
@@ -211,7 +212,7 @@ export class EditIssueComponent implements OnInit
   }
 
 
-  private onBugUpdatedSuccessfully(): (response: CustomHttpResponse | undefined) => void
+  private onBugUpdatedSuccessfully()
   {
     return (response: CustomHttpResponse | undefined) =>
     {
@@ -229,7 +230,7 @@ export class EditIssueComponent implements OnInit
     this.notificationService.sendSuccessNotification(response.message);
   }
 
-  private onError(): (errorResponse: HttpErrorResponse) => void
+  private onError()
   {
     return (errorResponse: HttpErrorResponse) =>
     {
@@ -269,3 +270,5 @@ export class EditIssueComponent implements OnInit
     return this.editIssueFormGroup.get('description');
   }
 }
+
+
