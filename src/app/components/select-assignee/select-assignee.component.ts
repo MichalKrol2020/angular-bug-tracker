@@ -34,10 +34,10 @@ export class SelectAssigneeComponent implements OnInit
 
   ngOnInit(): void
   {
-    this.onToggleSelectProject();
+    this.onProjectSelected();
   }
 
-  private onToggleSelectProject()
+  private onProjectSelected()
   {
     this.subscriptions.push(
     this.projectSelected$.pipe(mergeMap((project: Project) =>
@@ -96,16 +96,15 @@ export class SelectAssigneeComponent implements OnInit
 
 
   @HostListener('scroll', ['$event'])
-  onScroll(event: any)
+  onScroll(event: Event)
   {
     if(!this.currentProject)
     {
       return;
     }
 
-    let scrolled: boolean =
-      event.target.scrollTop + event.target.offsetHeight >=
-      event.target.scrollHeight - 1;
+    const target = event.target as HTMLElement;
+    let scrolled: boolean = target.scrollTop + target.offsetHeight >= target.scrollHeight - 1;
     if(scrolled && !this.endOfPages)
     {
       this.page++;
