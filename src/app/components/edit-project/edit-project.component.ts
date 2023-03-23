@@ -8,7 +8,7 @@ import {User} from "../../model/user";
 import {NotificationService} from "../../service/notification.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {LoaderService} from "../../service/loader.service";
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-edit-project',
@@ -41,7 +41,7 @@ export class EditProjectComponent implements OnInit {
     this.createEditProjectFormGroup();
   }
 
-  private createEditProjectFormGroup()
+  private createEditProjectFormGroup(): void
   {
     this.editProjectFormGroup = this.formBuilder.group
     ({
@@ -52,7 +52,7 @@ export class EditProjectComponent implements OnInit {
     });
   }
 
-  onSubmit()
+  onSubmit(): void
   {
     if(this.editProjectFormGroup.invalid)
     {
@@ -68,7 +68,7 @@ export class EditProjectComponent implements OnInit {
     this.onUpdateProject(formData);
   }
 
-  private onUpdateProject(formData: FormData)
+  private onUpdateProject(formData: FormData): void
   {
     this.subscriptions.push(
     this.projectService.editProject(this.currentAppUser.id, this.currentProject.name, formData).subscribe(
@@ -98,13 +98,13 @@ export class EditProjectComponent implements OnInit {
   }
 
 
-  private mapEditedProjectToCurrent(editedProject: Project)
+  private mapEditedProjectToCurrent(editedProject: Project): void
   {
     this.currentProject.name = editedProject.name;
     this.currentProject.description = editedProject.description;
   }
 
-  disableSubmitIfFieldsMatching()
+  disableSubmitIfFieldsMatching(): boolean
   {
     const newProjectName = this.getProjectNameFormControl()?.value;
     const newProjectDescription = this.getProjectDescriptionFormControl()?.value;
@@ -114,7 +114,7 @@ export class EditProjectComponent implements OnInit {
   }
 
 
-  ngOnDestroy()
+  ngOnDestroy(): void
   {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
@@ -130,3 +130,5 @@ export class EditProjectComponent implements OnInit {
     return this.editProjectFormGroup.get('description');
   }
 }
+
+
