@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TalkService} from "../../service/talk.service";
+import {SideNavToggle} from "../../model/side-nav-toggle";
 
 
 @Component({
@@ -21,7 +22,7 @@ export class DashboardComponent implements OnInit
   }
 
 
-  onToggleSideNav(data: SideNavToggle)
+  onToggleSideNav(data: SideNavToggle): void
   {
     this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed;
@@ -29,8 +30,3 @@ export class DashboardComponent implements OnInit
 }
 
 
-interface SideNavToggle
-{
-  screenWidth: number;
-  collapsed: boolean;
-}
