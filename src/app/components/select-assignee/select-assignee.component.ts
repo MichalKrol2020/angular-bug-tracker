@@ -37,7 +37,7 @@ export class SelectAssigneeComponent implements OnInit
     this.onProjectSelected();
   }
 
-  private onProjectSelected()
+  private onProjectSelected(): void
   {
     this.subscriptions.push(
     this.projectSelected$.pipe(mergeMap((project: Project) =>
@@ -51,7 +51,7 @@ export class SelectAssigneeComponent implements OnInit
     })).subscribe(this.processResults()));
   }
 
-  private getParticipantsIfProjectExists(project: Project)
+  private getParticipantsIfProjectExists(project: Project): Observable<UserPageableResponse | undefined>
   {
     if(project)
     {
@@ -61,13 +61,13 @@ export class SelectAssigneeComponent implements OnInit
     return of(undefined);
   }
 
-  private getParticipants(projectId: number)
+  private getParticipants(projectId: number): Observable<UserPageableResponse>
   {
     return this.userService.getParticipantsByProjectId(projectId, this.page, this.size, UserSortOrderEnum.FIRST_NAME, true);
   }
 
 
-  private resetParticipants()
+  private resetParticipants(): void
   {
     this.selectedAssignee = undefined;
     this.participants = [];
@@ -75,7 +75,7 @@ export class SelectAssigneeComponent implements OnInit
     this.endOfPages = false;
   }
 
-  onSelectAssignee(participant: User | undefined)
+  onSelectAssignee(participant: User | undefined): void
   {
     this.selectedAssignee = participant;
     this.assigneeSelectedEvent.emit(this.selectedAssignee);
@@ -96,7 +96,7 @@ export class SelectAssigneeComponent implements OnInit
 
 
   @HostListener('scroll', ['$event'])
-  onScroll(event: Event)
+  onScroll(event: Event): void
   {
     if(!this.currentProject)
     {
@@ -114,7 +114,7 @@ export class SelectAssigneeComponent implements OnInit
     }
   }
 
-  ngOnDestroy()
+  ngOnDestroy(): void
   {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
