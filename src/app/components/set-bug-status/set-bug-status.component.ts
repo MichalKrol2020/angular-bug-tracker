@@ -12,6 +12,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {NotificationType} from "../../enum/notification-type.enum";
 import {Subscription} from "rxjs";
+import {BugStatusEnum} from "../../enum/bug-status.enum";
 
 
 @Component({
@@ -50,7 +51,7 @@ export class SetBugStatusComponent implements OnInit {
     });
   }
 
-  onSubmit()
+  onSubmit(): void
   {
     if(this.setBugStatusFormGroup.invalid)
     {
@@ -62,14 +63,14 @@ export class SetBugStatusComponent implements OnInit {
     this.setStatus(status);
   }
 
-  private getBugStatusEnumName()
+  private getBugStatusEnumName(): BugStatusEnum
   {
     const status = this.getStatus()?.value;
     return BugEnumMapper.mapStatusToEnumName(status);
   }
 
 
-  private setStatus(status: string)
+  private setStatus(status: string): void
   {
     this.subscription =
     this.bugService.setStatus(this.currentBug.id, status).subscribe(
@@ -97,12 +98,12 @@ export class SetBugStatusComponent implements OnInit {
     }
   }
 
-  onSelectOption()
+  onSelectOption(): void
   {
     this.submitDisabled = false;
   }
 
-  ngOnDestroy()
+  ngOnDestroy(): void
   {
     this.subscription?.unsubscribe();
   }
