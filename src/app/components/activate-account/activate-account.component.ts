@@ -36,7 +36,7 @@ export class ActivateAccountComponent implements OnInit
     this.onActivateAccount();
   }
 
-  private onActivateAccount()
+  private onActivateAccount(): void
   {
     const token = this.route.snapshot.paramMap.get('token');
     if(token == null)
@@ -48,7 +48,7 @@ export class ActivateAccountComponent implements OnInit
     this.activateAccount(token);
   }
 
-  private activateAccount(token: string)
+  private activateAccount(token: string): void
   {
     this.subscription =
     this.userService.activateAccount(token).subscribe
@@ -77,7 +77,7 @@ export class ActivateAccountComponent implements OnInit
     }
   }
 
-  ngOnDestroy()
+  ngOnDestroy(): void
   {
     this.subscription?.unsubscribe();
   }
